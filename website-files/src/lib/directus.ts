@@ -257,7 +257,7 @@ export async function getCurrentActivity(limit?: number) {
   );
 }
 
-export async function getArchivedActivity(limit?: number) {
+export async function getArchivedActivity(limit?: number, offset?: number) {
   return await directus.request(
     readItems('activity', {
       filter: {
@@ -266,8 +266,22 @@ export async function getArchivedActivity(limit?: number) {
       },
       sort: ['-published_at'],
       limit: limit ?? -1,
+      offset: offset ?? 0,
     })
   );
+}
+
+export async function getArchivedActivityCount() {
+  const result = await directus.request(
+    readItems('activity', {
+      filter: {
+        status: { _eq: 'published' },
+        is_archive: { _eq: true },
+      },
+      aggregate: { count: ['*'] },
+    })
+  );
+  return (result as unknown as Array<{ count: number }>)[0]?.count ?? 0;
 }
 
 export async function getEventBySlug(slug: string) {

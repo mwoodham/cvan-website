@@ -3,14 +3,18 @@ import { PageHero } from '@/components/PageHero';
 import {
   getCurrentActivity,
   getArchivedActivity,
+  getArchivedActivityCount,
   getActivityPage,
   getActivityByTag,
   getProjectTagDescriptionBySlug,
   slugToDisplayName,
 } from '@/lib/directus';
 import ActivityCard from '@/components/ActivityCard';
+import ActivityArchive from '@/components/ActivityArchive';
 import { X } from 'lucide-react';
 import type { Metadata } from 'next';
+
+const ARCHIVE_PAGE_SIZE = 9;
 
 export const metadata: Metadata = {
   title: 'Activity',
@@ -99,9 +103,10 @@ export default async function ActivityPage({ searchParams }: ActivityPageProps) 
   }
 
   // Default view: show current and archived separately
-  const [currentActivity, archivedActivity, activityPageData] = await Promise.all([
+  const [currentActivity, archivedActivity, archivedCount, activityPageData] = await Promise.all([
     getCurrentActivity(),
-    getArchivedActivity(),
+    getArchivedActivity(ARCHIVE_PAGE_SIZE, 0),
+    getArchivedActivityCount(),
     getActivityPage(),
   ]);
 
@@ -132,17 +137,12 @@ export default async function ActivityPage({ searchParams }: ActivityPageProps) 
         </div>
       </section>
 
-      {/* Archive Section */}
-      {archivedActivity.length > 0 && (
-        <section className="py-16 lg:py-24 bg-cvan-cream">
-          <div className="mx-auto max-w-7xl px-6 lg:px-8">
-            <h2 className="text-3xl font-black tracking-tight text-black mb-8">Archive</h2>
-            <div className="grid grid-cols-1 gap-8 md:grid-cols-2 lg:grid-cols-3">
-              {archivedActivity.map((article) => <ActivityCard key={article.id} article={article} />)}
-            </div>
-          </div>
-        </section>
-      )}
+      {/* Archive Section with Load More */}
+      <ActivityArchive
+        initialActivities={archivedActivity}
+        totalCount={archivedCount}
+        pageSize={ARCHIVE_PAGE_SIZE}
+      />
     </>
   );
 }

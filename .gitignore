@@ -40,9 +40,12 @@ CVAN_BrandGuidelines_v1b.pdf
 "CVAN EM Activity overview doc.docx"
 "CVAN Website Rebuild Proposal.pdf"
 
-# Images folder (reference images, not for deployment)
-Images/
-Logos/
+# Images folder (reference images at root, not for deployment)
+/Images/
+/Logos/
+
+# But allow website public images
+!website-files/public/images/
 
 # Documentation (local only)
 docs/

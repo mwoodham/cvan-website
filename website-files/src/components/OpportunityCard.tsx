@@ -26,10 +26,14 @@ export default function OpportunityCard({ opportunity, basePath = '/opportunitie
 
   return (
     <article className="group relative bg-white border border-black/10 hover:border-cvan-orange transition-all duration-300">
-      {/* Image - will be implemented later */}
+      {/* Featured Image */}
       {opportunity.image_id && (
         <div className="aspect-[16/9] overflow-hidden bg-gray-100">
-          <div className="w-full h-full bg-gray-200" />
+          <img
+            src={`/assets/${opportunity.image_id}?width=600&height=338&fit=cover`}
+            alt={opportunity.title}
+            className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300"
+          />
         </div>
       )}
 

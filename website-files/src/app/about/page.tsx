@@ -14,8 +14,6 @@ export default async function AboutPage() {
     getAboutPage(),
   ]);
 
-  const directusUrl = process.env.NEXT_PUBLIC_DIRECTUS_URL || 'http://localhost:8055';
-
   return (
     <>
       <PageHero
@@ -104,7 +102,7 @@ export default async function AboutPage() {
                   {member.photo_id && (
                     <div className="mb-6 flex justify-center">
                       <img
-                        src={`${directusUrl}/assets/${member.photo_id}?width=300&height=300&fit=cover`}
+                        src={`/assets/${member.photo_id}?width=300&height=300&fit=cover`}
                         alt={member.name}
                         className="w-48 h-48 object-cover rounded-full"
                       />
@@ -160,7 +158,7 @@ export default async function AboutPage() {
                   {member.photo_id && (
                     <div className="mb-4 flex justify-center">
                       <img
-                        src={`${directusUrl}/assets/${member.photo_id}?width=200&height=200&fit=cover`}
+                        src={`/assets/${member.photo_id}?width=200&height=200&fit=cover`}
                         alt={member.name}
                         className="w-32 h-32 object-cover rounded-full"
                       />

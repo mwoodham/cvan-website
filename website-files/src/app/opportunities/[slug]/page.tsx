@@ -40,7 +40,6 @@ export default async function OpportunityPage({ params }: OpportunityPageProps) 
 
   // Handle null deadline for ongoing opportunities
   const deadline = opportunity.deadline ? new Date(opportunity.deadline) : null;
-  const directusUrl = process.env.NEXT_PUBLIC_DIRECTUS_URL || 'http://localhost:8055';
 
   // Determine deadline display text
   const getDeadlineText = () => {
@@ -72,7 +71,7 @@ export default async function OpportunityPage({ params }: OpportunityPageProps) 
       {opportunity.image_id && (
         <div className="relative h-[400px] lg:h-[500px] overflow-hidden bg-gray-900">
           <img
-            src={`${directusUrl}/assets/${opportunity.image_id}?width=1920&height=800&fit=cover`}
+            src={`/assets/${opportunity.image_id}?width=1920&height=800&fit=cover`}
             alt={opportunity.title}
             className="w-full h-full object-cover opacity-60"
           />

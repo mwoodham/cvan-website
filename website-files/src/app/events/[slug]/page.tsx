@@ -40,7 +40,6 @@ export default async function EventPage({ params }: EventPageProps) {
 
   const startDate = new Date(event.event_date);
   const endDate = event.event_end_date ? new Date(event.event_end_date) : null;
-  const directusUrl = process.env.NEXT_PUBLIC_DIRECTUS_URL || 'http://localhost:8055';
 
   return (
     <div className="min-h-screen bg-white">
@@ -61,7 +60,7 @@ export default async function EventPage({ params }: EventPageProps) {
       {event.image_id && (
         <div className="relative h-[400px] lg:h-[500px] overflow-hidden bg-gray-900">
           <img
-            src={`${directusUrl}/assets/${event.image_id}?width=1920&height=800&fit=cover`}
+            src={`/assets/${event.image_id}?width=1920&height=800&fit=cover`}
             alt={event.title}
             className="w-full h-full object-cover opacity-60"
           />

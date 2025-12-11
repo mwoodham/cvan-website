@@ -12,15 +12,13 @@ export default function EventCard({ event, basePath = '/events' }: EventCardProp
   const startDate = new Date(event.event_date);
   const endDate = event.event_end_date ? new Date(event.event_end_date) : null;
 
-  const directusUrl = process.env.NEXT_PUBLIC_DIRECTUS_URL || 'http://localhost:8055';
-
   return (
     <article className="group relative bg-white border border-black/10 hover:border-cvan-purple transition-all duration-300">
       {/* Image */}
       {event.image_id && (
         <div className="aspect-[16/9] overflow-hidden bg-gray-100">
           <img
-            src={`${directusUrl}/assets/${event.image_id}?width=800&height=450&fit=cover`}
+            src={`/assets/${event.image_id}?width=800&height=450&fit=cover`}
             alt={event.title}
             className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300"
           />

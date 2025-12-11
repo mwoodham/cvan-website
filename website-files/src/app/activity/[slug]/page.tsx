@@ -24,7 +24,6 @@ export default async function ActivityPage({ params, searchParams }: ActivityPag
   }
 
   const publishedDate = article.published_at ? new Date(article.published_at) : null;
-  const directusUrl = process.env.NEXT_PUBLIC_DIRECTUS_URL || 'http://localhost:8055';
 
   return (
     <div className="min-h-screen bg-white">
@@ -45,7 +44,7 @@ export default async function ActivityPage({ params, searchParams }: ActivityPag
       {article.featured_image_id && (
         <div className="relative h-[400px] lg:h-[500px] overflow-hidden bg-gray-900">
           <img
-            src={`${directusUrl}/assets/${article.featured_image_id}?width=1920&height=800&fit=cover`}
+            src={`/assets/${article.featured_image_id}?width=1920&height=800&fit=cover`}
             alt={article.title}
             className="w-full h-full object-cover opacity-60"
           />

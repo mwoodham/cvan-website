@@ -10,7 +10,6 @@ interface ActivityCardProps {
 
 export default function ActivityCard({ article, currentTagFilter }: ActivityCardProps) {
   const publishedDate = article.published_at ? new Date(article.published_at) : null;
-  const directusUrl = process.env.NEXT_PUBLIC_DIRECTUS_URL || 'http://localhost:8055';
   const articleLink = currentTagFilter
     ? `/activity/${article.slug}?from=${encodeURIComponent(currentTagFilter)}`
     : `/activity/${article.slug}`;
@@ -21,7 +20,7 @@ export default function ActivityCard({ article, currentTagFilter }: ActivityCard
       {article.featured_image_id && (
         <div className="aspect-[16/9] overflow-hidden bg-gray-100">
           <img
-            src={`${directusUrl}/assets/${article.featured_image_id}?width=600&height=338&fit=cover`}
+            src={`/assets/${article.featured_image_id}?width=600&height=338&fit=cover`}
             alt={article.title}
             className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300"
           />

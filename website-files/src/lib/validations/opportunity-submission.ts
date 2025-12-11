@@ -40,9 +40,7 @@ export const opportunitySubmissionSchema = z.object({
     today.setHours(0, 0, 0, 0);
     return selectedDate >= today;
   }, 'Deadline must be today or in the future, or select "Ongoing"'),
-  deadline_type: z.enum(['specific', 'ongoing'], {
-    required_error: 'Please select deadline type',
-  }),
+  deadline_type: z.enum(['specific', 'ongoing']),
   wage_fee: z.string().min(1, 'Please specify wage/fee information or enter "N/A"'),
   location_address: z.string().min(2, 'Location is required'),
   link: z.string().url('Please enter a valid URL').min(1, 'Website URL is required'),

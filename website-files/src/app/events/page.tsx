@@ -1,4 +1,5 @@
 import Link from 'next/link';
+import { Suspense } from 'react';
 import { PageHero } from '@/components/PageHero';
 import { getPublishedEvents } from '@/lib/directus';
 import { EventsFilterableList } from '@/components/EventsFilterableList';
@@ -31,7 +32,9 @@ export default async function EventsPage() {
         }
       />
 
-      <EventsFilterableList events={events} />
+      <Suspense fallback={<div className="py-16 text-center">Loading events...</div>}>
+        <EventsFilterableList events={events} />
+      </Suspense>
     </>
   );
 }

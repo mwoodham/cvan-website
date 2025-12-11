@@ -1,4 +1,5 @@
 import Link from 'next/link';
+import { Suspense } from 'react';
 import { PageHero } from '@/components/PageHero';
 import { getPublishedOpportunities } from '@/lib/directus';
 import { OpportunitiesFilterableList } from '@/components/OpportunitiesFilterableList';
@@ -31,7 +32,9 @@ export default async function OpportunitiesPage() {
         }
       />
 
-      <OpportunitiesFilterableList opportunities={opportunities} />
+      <Suspense fallback={<div className="py-16 text-center">Loading opportunities...</div>}>
+        <OpportunitiesFilterableList opportunities={opportunities} />
+      </Suspense>
     </>
   );
 }

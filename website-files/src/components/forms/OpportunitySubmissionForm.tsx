@@ -139,11 +139,11 @@ export function OpportunitySubmissionForm() {
           )}
         </div>
 
-        <div>
+        <div className="overflow-hidden">
           <label className="block text-sm font-semibold mb-2">
             Deadline Type <span className="text-cvan-orange">*</span>
           </label>
-          <div className="flex gap-4 mb-4">
+          <div className="flex flex-wrap gap-4 mb-4">
             <label className="flex items-center">
               <input
                 type="radio"
@@ -173,14 +173,16 @@ export function OpportunitySubmissionForm() {
           </div>
 
           {deadlineType === 'specific' && (
-            <input
-              id="deadline"
-              type="date"
-              {...register('deadline')}
-              className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-cvan-orange focus:border-transparent"
-            />
+            <div className="min-w-0">
+              <input
+                id="deadline"
+                type="date"
+                {...register('deadline')}
+                className="w-full max-w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-cvan-orange focus:border-transparent"
+              />
+            </div>
           )}
-          
+
           {errors.deadline && (
             <p className="mt-1 text-sm text-red-600">{errors.deadline.message}</p>
           )}

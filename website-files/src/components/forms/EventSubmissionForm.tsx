@@ -184,11 +184,11 @@ export function EventSubmissionForm() {
       </section>
 
       {/* Dates Section */}
-      <section className="space-y-6">
+      <section className="space-y-6 overflow-hidden">
         <h2 className="text-2xl font-bold">Dates</h2>
 
         <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-          <div>
+          <div className="min-w-0">
             <label htmlFor="event_date" className="block text-sm font-semibold mb-2">
               Start Date <span className="text-cvan-orange">*</span>
             </label>
@@ -196,14 +196,14 @@ export function EventSubmissionForm() {
               id="event_date"
               type="date"
               {...register('event_date')}
-              className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-cvan-purple focus:border-transparent"
+              className="w-full max-w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-cvan-purple focus:border-transparent"
             />
             {errors.event_date && (
               <p className="mt-1 text-sm text-red-600">{errors.event_date.message}</p>
             )}
           </div>
 
-          <div>
+          <div className="min-w-0">
             <label htmlFor="event_end_date" className="block text-sm font-semibold mb-2">
               End Date <span className="text-gray-500">(optional)</span>
             </label>
@@ -211,7 +211,7 @@ export function EventSubmissionForm() {
               id="event_end_date"
               type="date"
               {...register('event_end_date')}
-              className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-cvan-purple focus:border-transparent"
+              className="w-full max-w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-cvan-purple focus:border-transparent"
             />
             {errors.event_end_date && (
               <p className="mt-1 text-sm text-red-600">{errors.event_end_date.message}</p>

@@ -24,15 +24,6 @@ export default function Header() {
 
   return (
     <header className="sticky top-0 z-50 w-full border-b border-black/10 bg-white/80 backdrop-blur-md">
-      {/* Corner Decoration - Left L-shape graphic symbol */}
-      <div
-        className="absolute top-2 left-2 w-10 h-10 bg-black pointer-events-none"
-        style={{
-          clipPath: 'polygon(0 0, 100% 0, 100% 25%, 25% 25%, 25% 100%, 0 100%)',
-        }}
-        aria-hidden="true"
-      />
-
       <nav className="mx-auto max-w-7xl px-6 lg:px-8" aria-label="Main navigation">
         <div className="flex h-20 items-center justify-between">
           {/* Logo */}

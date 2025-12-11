@@ -121,6 +121,7 @@ export type MentoringPage = {
   what_we_offer_content?: any;
   get_involved_title?: string;
   get_involved_content?: any;
+  calendly_url?: string;
 };
 
 export type EventSubmissionForm = {

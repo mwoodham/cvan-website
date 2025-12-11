@@ -1,0 +1,48 @@
+# Dependencies
+node_modules/
+
+# Environment files
+.env
+.env.local
+.env.*.local
+
+# OS files
+.DS_Store
+Thumbs.db
+
+# IDE
+.idea/
+.vscode/
+*.swp
+*.swo
+
+# Claude Code
+.claude/
+
+# MCP config (contains local paths)
+.mcp.json
+
+# Build artifacts
+*.log
+
+# Backup folders (not needed in repo)
+website-files-backup/
+payload-backup/
+
+# WordPress migration files (one-time use)
+wp-migration-files/
+
+# Large reference files (not needed for deployment)
+*.pdf
+*.docx
+*.pptx
+CVAN_BrandGuidelines_v1b.pdf
+"CVAN EM Activity overview doc.docx"
+"CVAN Website Rebuild Proposal.pdf"
+
+# Images folder (reference images, not for deployment)
+Images/
+Logos/
+
+# Documentation (local only)
+docs/

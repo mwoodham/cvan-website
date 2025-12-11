@@ -1,0 +1,302 @@
+@import "tailwindcss";
+
+:root {
+  --background: #ffffff;
+  --foreground: #000000;
+
+  /* CVAN Brand Colors */
+  --cvan-yellow: #FFED00;
+  --cvan-blue: #4038FF;
+  --cvan-green: #75FFCF;
+  --cvan-purple: #8742FF;
+  --cvan-orange: #FF6142;
+  --cvan-beige: #EDDBBD;
+  --cvan-cream: #F5F0EB;
+}
+
+@theme inline {
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+
+  /* CVAN Brand Colors */
+  --color-cvan-yellow: var(--cvan-yellow);
+  --color-cvan-blue: var(--cvan-blue);
+  --color-cvan-green: var(--cvan-green);
+  --color-cvan-purple: var(--cvan-purple);
+  --color-cvan-orange: var(--cvan-orange);
+  --color-cvan-beige: var(--cvan-beige);
+  --color-cvan-cream: var(--cvan-cream);
+
+  /* Typography */
+  --font-sans: var(--font-questrial), Questrial, "Helvetica Neue", Helvetica, Arial, sans-serif;
+}
+
+body {
+  background: var(--background);
+  color: var(--foreground);
+  font-family: var(--font-sans);
+  font-size: 16px;
+  line-height: 1.6;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+/* Accessibility - High contrast focus indicators */
+*:focus-visible {
+  outline: 2px solid var(--cvan-yellow);
+  outline-offset: 2px;
+}
+
+/* Smooth scrolling */
+html {
+  scroll-behavior: smooth;
+}
+
+/* Respect user's motion preferences */
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+}
+
+/* Rich text / Prose styles for CMS content */
+.prose {
+  color: rgba(0, 0, 0, 0.85);
+  line-height: 1.75;
+}
+
+.prose p {
+  margin-top: 1.25em;
+  margin-bottom: 1.25em;
+}
+
+.prose p:first-child {
+  margin-top: 0;
+}
+
+.prose h2 {
+  font-size: 1.5em;
+  font-weight: 700;
+  margin-top: 2em;
+  margin-bottom: 1em;
+  line-height: 1.333;
+}
+
+.prose h3 {
+  font-size: 1.25em;
+  font-weight: 700;
+  margin-top: 1.6em;
+  margin-bottom: 0.6em;
+  line-height: 1.6;
+}
+
+.prose h4 {
+  font-size: 1.125em;
+  font-weight: 600;
+  margin-top: 1.5em;
+  margin-bottom: 0.5em;
+}
+
+.prose strong {
+  font-weight: 700;
+}
+
+.prose a {
+  color: var(--cvan-blue);
+  text-decoration: underline;
+  transition: color 0.15s ease;
+}
+
+.prose a:hover {
+  color: var(--cvan-purple);
+}
+
+.prose ul {
+  list-style-type: disc;
+  margin-top: 1.25em;
+  margin-bottom: 1.25em;
+  padding-left: 1.625em;
+}
+
+.prose ol {
+  list-style-type: decimal;
+  margin-top: 1.25em;
+  margin-bottom: 1.25em;
+  padding-left: 1.625em;
+}
+
+.prose li {
+  margin-top: 0.5em;
+  margin-bottom: 0.5em;
+}
+
+.prose li::marker {
+  color: rgba(0, 0, 0, 0.5);
+}
+
+.prose blockquote {
+  font-style: italic;
+  border-left: 4px solid var(--cvan-blue);
+  padding-left: 1em;
+  margin-top: 1.6em;
+  margin-bottom: 1.6em;
+  color: rgba(0, 0, 0, 0.7);
+}
+
+.prose hr {
+  border-color: rgba(0, 0, 0, 0.1);
+  margin-top: 3em;
+  margin-bottom: 3em;
+}
+
+.prose img {
+  margin-top: 2em;
+  margin-bottom: 2em;
+}
+
+/* Center images, figures, and video embeds in prose content */
+.prose figure {
+  text-align: center;
+  margin-top: 2em;
+  margin-bottom: 2em;
+}
+
+.prose figure img {
+  display: inline-block;
+  margin-top: 0;
+  margin-bottom: 0.5em;
+}
+
+.prose figcaption {
+  font-size: 0.875em;
+  color: rgba(0, 0, 0, 0.6);
+  font-style: italic;
+  margin-top: 0.5em;
+}
+
+/* Center divs with text-align: center (for inline images/videos) */
+.prose div[style*="text-align: center"],
+.prose div[style*="text-align:center"] {
+  display: block;
+  margin-top: 2em;
+  margin-bottom: 2em;
+}
+
+.prose div[style*="text-align: center"] img,
+.prose div[style*="text-align:center"] img {
+  display: inline-block;
+  margin-top: 0;
+  margin-bottom: 0;
+}
+
+/* Video embed container centering */
+.prose .video-embed,
+.prose div[style*="padding:56.25%"] {
+  margin-top: 2em;
+  margin-bottom: 2em;
+}
+
+.prose iframe {
+  max-width: 100%;
+}
+
+.prose-lg {
+  font-size: 1.125rem;
+}
+
+.prose-lg p {
+  margin-top: 1.333em;
+  margin-bottom: 1.333em;
+}
+
+.prose-lg h2 {
+  font-size: 1.667em;
+}
+
+.prose-lg h3 {
+  font-size: 1.333em;
+}
+
+/* Card hover behavior - prevent card effects when hovering tags */
+article.group:has(.tag-link:hover) {
+  border-color: rgba(0, 0, 0, 0.1) !important;
+}
+
+article.group:has(.tag-link:hover) img {
+  transform: scale(1) !important;
+}
+
+article.group:has(.tag-link:hover) h3 {
+  color: black !important;
+}
+
+/* Hero section L-shape graphics - transition for hover animation */
+.hero-section .cvan-shape {
+  transition: transform 0.7s ease-in-out;
+}
+
+/* Home page hero - diagonal meeting animation (shapes move toward each other until tips touch) */
+.home-hero:hover .cvan-shape-left {
+  transform: translate(-80px, 80px) rotate(180deg) !important;
+}
+
+.home-hero:hover .cvan-shape-right {
+  transform: translate(80px, -80px) !important;
+}
+
+/* PageHero arrangement-specific hover animations */
+
+/* Corners (About page) - shapes move slightly inward */
+.hero-corners:hover .cvan-shape-left {
+  transform: translate(8px, -8px) !important;
+}
+.hero-corners:hover .cvan-shape-right {
+  transform: translate(-8px, 8px) rotate(270deg) !important;
+}
+
+/* Stacked-right (Activity page) - shapes move closer vertically */
+.hero-stacked-right:hover .cvan-shape-left {
+  transform: translate(0, 8px) rotate(180deg) !important;
+}
+.hero-stacked-right:hover .cvan-shape-right {
+  transform: translate(0, -8px) !important;
+}
+
+/* Bottom-left (Events page) - both shapes rise up */
+.hero-bottom-left:hover .cvan-shape-left {
+  transform: translate(0, -8px) !important;
+}
+.hero-bottom-left:hover .cvan-shape-right {
+  transform: translate(0, -8px) !important;
+}
+
+/* Top-right (Opportunities page) - shapes expand outward */
+.hero-top-right:hover .cvan-shape-left {
+  transform: translate(8px, -8px) rotate(270deg) !important;
+}
+.hero-top-right:hover .cvan-shape-right {
+  transform: translate(-8px, 8px) rotate(90deg) !important;
+}
+
+/* Support (Mentoring page) - one shape supports another with rotation */
+.hero-support:hover .cvan-shape-left {
+  transform: translate(10px, -10px) !important;
+}
+.hero-support:hover .cvan-shape-right {
+  transform: translate(-10px, 10px) rotate(180deg) !important;
+}
+
+/* Respect reduced motion for hero animations */
+@media (prefers-reduced-motion: reduce) {
+  .hero-section .cvan-shape {
+    transition: none;
+  }
+}

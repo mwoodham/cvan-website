@@ -24,11 +24,11 @@ export default function CalendlyEmbed({ url }: CalendlyEmbedProps) {
   }, []);
 
   return (
-    <div className="overflow-hidden" style={{ marginTop: '-40px', marginBottom: '-20px' }}>
+    <div className="overflow-hidden">
       <div
         className="calendly-inline-widget"
         data-url={url}
-        style={{ minWidth: '320px', height: '950px' }}
+        style={{ minWidth: '320px', height: '1200px' }}
       />
     </div>
   );

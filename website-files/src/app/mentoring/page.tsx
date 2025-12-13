@@ -8,6 +8,9 @@ export const metadata: Metadata = {
   description: 'Professional development and mentoring for visual arts practitioners',
 };
 
+// Revalidate every 5 minutes - singleton content changes infrequently
+export const revalidate = 300;
+
 export default async function MentoringPage() {
   const mentoringContent = await getMentoringPage();
   return (

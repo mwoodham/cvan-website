@@ -21,6 +21,9 @@ export const metadata: Metadata = {
   description: 'Updates, features, and insights from the East Midlands visual arts community',
 };
 
+// Revalidate every 60 seconds - content updates appear quickly
+export const revalidate = 60;
+
 interface ActivityPageProps {
   searchParams: Promise<{ tag?: string }>;
 }

@@ -7,6 +7,9 @@ export const metadata: Metadata = {
   description: 'Learn about CVAN East Midlands and our team',
 };
 
+// Revalidate every 5 minutes - singleton content changes infrequently
+export const revalidate = 300;
+
 export default async function AboutPage() {
   const [teamMembers, steeringGroup, aboutContent] = await Promise.all([
     getTeamMembers('team'),

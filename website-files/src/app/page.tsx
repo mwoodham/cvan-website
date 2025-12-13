@@ -10,6 +10,9 @@ import EventCard from '@/components/EventCard';
 import OpportunityCard from '@/components/OpportunityCard';
 import ActivityCard from '@/components/ActivityCard';
 
+// Revalidate every 60 seconds - home shows latest events/opportunities
+export const revalidate = 60;
+
 export default async function HomePage() {
   // Fetch data from Directus
   const [events, opportunities, activity, homeContent] = await Promise.all([

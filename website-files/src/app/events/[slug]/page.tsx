@@ -6,6 +6,9 @@ import { getEventBySlug } from '@/lib/directus';
 import directus from '@/lib/directus';
 import { readItem } from '@directus/sdk';
 
+// Revalidate every 60 seconds - content edits appear quickly
+export const revalidate = 60;
+
 interface EventPageProps {
   params: {
     slug: string;

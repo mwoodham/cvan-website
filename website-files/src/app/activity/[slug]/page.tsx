@@ -4,6 +4,9 @@ import { format } from 'date-fns';
 import { Calendar, ArrowLeft, Tag } from 'lucide-react';
 import { getActivityBySlug, tagNameToSlug } from '@/lib/directus';
 
+// Revalidate every 60 seconds - content edits appear quickly
+export const revalidate = 60;
+
 interface ActivityPageProps {
   params: {
     slug: string;

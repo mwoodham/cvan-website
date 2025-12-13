@@ -10,6 +10,9 @@ export const metadata: Metadata = {
   description: 'Funding, residencies, open calls, and professional development',
 };
 
+// Revalidate every 60 seconds - user submissions appear quickly
+export const revalidate = 60;
+
 export default async function OpportunitiesPage() {
   const opportunities = await getPublishedOpportunities();
 

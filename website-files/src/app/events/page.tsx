@@ -10,6 +10,9 @@ export const metadata: Metadata = {
   description: 'Discover exhibitions, workshops, and artist talks across the East Midlands',
 };
 
+// Revalidate every 60 seconds - user submissions appear quickly
+export const revalidate = 60;
+
 export default async function EventsPage() {
   const events = await getPublishedEvents();
 

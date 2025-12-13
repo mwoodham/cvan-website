@@ -31,7 +31,7 @@ const socialLinks = [
 ];
 
 const legalLinks = [
-  { name: 'Privacy Policy', href: '/privacy' },
+  { name: 'Privacy Policy', href: '/privacy-policy' },
   { name: 'Accessibility', href: '/accessibility' },
 ];
 

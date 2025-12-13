@@ -156,6 +156,22 @@ export type ProjectTagDescription = {
   updated_at: string;
 };
 
+export type PrivacyPolicyPage = {
+  id: number;
+  hero_title: string;
+  hero_description?: string;
+  content?: any;
+  last_updated?: string;
+};
+
+export type AccessibilityPage = {
+  id: number;
+  hero_title: string;
+  hero_description?: string;
+  content?: any;
+  last_updated?: string;
+};
+
 type DirectusCollections = {
   events: Event[];
   opportunities: Opportunity[];
@@ -168,6 +184,8 @@ type DirectusCollections = {
   event_submission_form: EventSubmissionForm;
   opportunity_submission_form: OpportunitySubmissionForm;
   project_tag_descriptions: ProjectTagDescription[];
+  privacy_policy_page: PrivacyPolicyPage;
+  accessibility_page: AccessibilityPage;
 };
 
 // Create Directus client
@@ -457,4 +475,23 @@ export function slugToDisplayName(slug: string): string {
     .split('-')
     .map(word => word.charAt(0).toUpperCase() + word.slice(1))
     .join(' ');
+}
+
+// Legal pages
+export async function getPrivacyPolicyPage(): Promise<PrivacyPolicyPage | null> {
+  try {
+    return await directus.request(readSingleton('privacy_policy_page'));
+  } catch (error) {
+    console.warn('privacy_policy_page singleton not configured in Directus');
+    return null;
+  }
+}
+
+export async function getAccessibilityPage(): Promise<AccessibilityPage | null> {
+  try {
+    return await directus.request(readSingleton('accessibility_page'));
+  } catch (error) {
+    console.warn('accessibility_page singleton not configured in Directus');
+    return null;
+  }
 }

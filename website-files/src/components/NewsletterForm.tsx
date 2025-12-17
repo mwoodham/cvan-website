@@ -85,7 +85,7 @@ export function NewsletterForm({ className = '' }: NewsletterFormProps) {
   if (status === 'success') {
     return (
       <div className={`${className}`}>
-        <p className="text-lg font-semibold text-cvan-green">Thanks for subscribing!</p>
+        <p className="text-lg font-semibold text-cvan-yellow">Thanks for subscribing!</p>
         <p className="text-sm text-white/80 mt-1">Check your inbox for a confirmation email.</p>
       </div>
     );
@@ -105,7 +105,7 @@ export function NewsletterForm({ className = '' }: NewsletterFormProps) {
         <button
           type="submit"
           disabled={status === 'loading'}
-          className="px-6 py-3 bg-cvan-green text-black font-semibold hover:bg-cvan-green/90 transition-colors disabled:opacity-50 disabled:cursor-not-allowed whitespace-nowrap"
+          className="px-6 py-3 bg-cvan-yellow text-black font-semibold hover:bg-cvan-yellow/90 transition-colors disabled:opacity-50 disabled:cursor-not-allowed whitespace-nowrap"
         >
           {status === 'loading' ? 'Subscribing...' : 'Subscribe'}
         </button>

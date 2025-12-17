@@ -179,17 +179,17 @@ export function PageHero({
         );
 
       case 'support':
-        // Support arrangement (Mentoring) - one shape "supporting" another with rotation on hover
+        // Support arrangement (Mentoring) - shapes on right until xl screens to avoid covering text
         return (
           <>
             <FilledLShape
               color={fillColor}
-              className="cvan-shape cvan-shape-left absolute bottom-4 left-4 lg:bottom-8 lg:left-8 w-16 h-16 lg:w-24 lg:h-24 pointer-events-none transition-transform duration-700 ease-in-out"
+              className="cvan-shape cvan-shape-left absolute bottom-4 right-4 xl:bottom-8 xl:left-8 xl:right-auto w-16 h-16 xl:w-24 xl:h-24 pointer-events-none transition-transform duration-700 ease-in-out"
               style={{ transform: 'translate(0, 0)' }}
             />
             <OutlinedLShape
               color={fillColor}
-              className="cvan-shape cvan-shape-right absolute bottom-12 left-12 lg:bottom-20 lg:left-20 w-16 h-16 lg:w-24 lg:h-24 pointer-events-none transition-transform duration-700 ease-in-out"
+              className="cvan-shape cvan-shape-right absolute bottom-12 right-12 xl:bottom-20 xl:left-20 xl:right-auto w-16 h-16 xl:w-24 xl:h-24 pointer-events-none transition-transform duration-700 ease-in-out"
               style={{ transform: 'translate(0, 0) rotate(0deg)' }}
             />
           </>

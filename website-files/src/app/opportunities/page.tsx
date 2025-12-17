@@ -1,7 +1,7 @@
 import Link from 'next/link';
 import { Suspense } from 'react';
 import { PageHero } from '@/components/PageHero';
-import { getPublishedOpportunities } from '@/lib/directus';
+import { getPublishedOpportunities, getHomePage } from '@/lib/directus';
 import { OpportunitiesFilterableList } from '@/components/OpportunitiesFilterableList';
 import type { Metadata } from 'next';
 
@@ -14,13 +14,18 @@ export const metadata: Metadata = {
 export const revalidate = 60;
 
 export default async function OpportunitiesPage() {
-  const opportunities = await getPublishedOpportunities();
+  const [opportunities, homePage] = await Promise.all([
+    getPublishedOpportunities(),
+    getHomePage(),
+  ]);
+
+  const description = homePage?.opportunities_section_description || 'Funding, residencies, open calls, and professional development';
 
   return (
     <>
       <PageHero
         title="Jobs & Opportunities"
-        description="Funding, residencies, open calls, and professional development"
+        description={description}
         bgColor="orange"
         textColor="beige"
         graphicColor="beige"

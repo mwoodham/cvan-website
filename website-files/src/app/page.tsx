@@ -9,6 +9,7 @@ import {
 import EventCard from '@/components/EventCard';
 import OpportunityCard from '@/components/OpportunityCard';
 import ActivityCard from '@/components/ActivityCard';
+import { NewsletterForm } from '@/components/NewsletterForm';
 
 // Revalidate every 60 seconds - home shows latest events/opportunities
 export const revalidate = 60;
@@ -215,12 +216,7 @@ export default async function HomePage() {
               events across the East Midlands visual arts community.
             </p>
             <div className="mt-8">
-              <Link
-                href="/mailing-list"
-                className="inline-block bg-cvan-yellow px-8 py-3 text-sm font-semibold text-black hover:bg-cvan-yellow/90 transition-colors"
-              >
-                Join Mailing List
-              </Link>
+              <NewsletterForm className="max-w-md mx-auto text-left" />
             </div>
           </div>
         </div>

@@ -47,7 +47,7 @@ export default async function ActivityPage({ params, searchParams }: ActivityPag
       {article.featured_image_id && (
         <div className="relative h-[400px] lg:h-[500px] overflow-hidden bg-gray-900">
           <img
-            src={`/assets/${article.featured_image_id}?width=1920&height=800&fit=cover`}
+            src={`/assets/${article.featured_image_id}?width=1920&height=800&fit=cover&t=${article.updated_at}`}
             alt={article.title}
             className="w-full h-full object-cover opacity-60"
           />

@@ -63,7 +63,7 @@ export default async function EventPage({ params }: EventPageProps) {
       {event.image_id && (
         <div className="relative h-[400px] lg:h-[500px] overflow-hidden bg-gray-900">
           <img
-            src={`/assets/${event.image_id}?width=1920&height=800&fit=cover`}
+            src={`/assets/${event.image_id}?width=1920&height=800&fit=cover&t=${event.updated_at}`}
             alt={event.title}
             className="w-full h-full object-cover opacity-60"
           />

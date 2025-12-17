@@ -18,7 +18,7 @@ export default function EventCard({ event, basePath = '/events' }: EventCardProp
       {event.image_id && (
         <div className="aspect-[16/9] overflow-hidden bg-gray-100">
           <img
-            src={`/assets/${event.image_id}?width=800&height=450&fit=cover`}
+            src={`/assets/${event.image_id}?width=800&height=450&fit=cover&t=${event.updated_at}`}
             alt={event.title}
             className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300"
           />

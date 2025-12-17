@@ -20,7 +20,7 @@ export default function ActivityCard({ article, currentTagFilter }: ActivityCard
       {article.featured_image_id && (
         <div className="aspect-[16/9] overflow-hidden bg-gray-100">
           <img
-            src={`/assets/${article.featured_image_id}?width=600&height=338&fit=cover`}
+            src={`/assets/${article.featured_image_id}?width=600&height=338&fit=cover&t=${article.updated_at}`}
             alt={article.title}
             className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300"
           />

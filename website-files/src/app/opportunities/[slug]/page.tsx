@@ -74,7 +74,7 @@ export default async function OpportunityPage({ params }: OpportunityPageProps) 
       {opportunity.image_id && (
         <div className="relative h-[400px] lg:h-[500px] overflow-hidden bg-gray-900">
           <img
-            src={`/assets/${opportunity.image_id}?width=1920&height=800&fit=cover`}
+            src={`/assets/${opportunity.image_id}?width=1920&height=800&fit=cover&t=${opportunity.updated_at}`}
             alt={opportunity.title}
             className="w-full h-full object-cover opacity-60"
           />

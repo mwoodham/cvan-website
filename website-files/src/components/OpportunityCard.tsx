@@ -65,7 +65,9 @@ export default function OpportunityCard({ opportunity, basePath = '/opportunitie
         {/* About */}
         {opportunity.about && (
           <p className="text-sm text-black/70 mb-4 line-clamp-2">
-            {typeof opportunity.about === 'string' ? opportunity.about : ''}
+            {typeof opportunity.about === 'string'
+              ? opportunity.about.replace(/<[^>]*>/g, '').replace(/&[^;]+;/g, ' ').trim()
+              : ''}
           </p>
         )}
 

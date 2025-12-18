@@ -160,13 +160,14 @@ export default async function OpportunityPage({ params }: OpportunityPageProps) 
         </header>
 
         {/* Content */}
-        <div className="prose prose-lg max-w-none mb-12">
-          {opportunity.about && (
-            <div className="whitespace-pre-wrap text-black/80 leading-relaxed">
-              {typeof opportunity.about === 'string' ? opportunity.about : ''}
-            </div>
-          )}
-        </div>
+        {opportunity.about && (
+          <div
+            className="prose prose-lg max-w-none mb-12 prose-headings:font-bold prose-headings:text-black prose-p:text-black/80 prose-a:text-cvan-purple prose-a:font-semibold hover:prose-a:underline prose-strong:text-black prose-ul:text-black/80 prose-ol:text-black/80"
+            dangerouslySetInnerHTML={{
+              __html: typeof opportunity.about === 'string' ? opportunity.about : ''
+            }}
+          />
+        )}
 
         {/* External Link */}
         {opportunity.link && (

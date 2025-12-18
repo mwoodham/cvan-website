@@ -15,7 +15,7 @@ const navigation = [
 ];
 
 const awdLink = {
-  href: 'https://cvaneastmidlands.co.uk/awd/directory',
+  href: 'https://artsworkerdirectory.org/',
   external: true,
 };
 

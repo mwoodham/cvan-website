@@ -179,18 +179,17 @@ export function PageHero({
         );
 
       case 'support':
-        // Support arrangement (Mentoring) - shapes on right until xl screens to avoid covering text
+        // Support arrangement (Mentoring) - shapes always on right, stacked vertically
         return (
           <>
             <FilledLShape
               color={fillColor}
-              className="cvan-shape cvan-shape-left absolute bottom-4 right-4 xl:bottom-8 xl:left-8 xl:right-auto w-16 h-16 xl:w-24 xl:h-24 pointer-events-none transition-transform duration-700 ease-in-out"
-              style={{ transform: 'translate(0, 0)' }}
+              className="cvan-shape cvan-shape-left absolute bottom-4 right-4 lg:bottom-8 lg:right-8 w-16 h-16 lg:w-24 lg:h-24 pointer-events-none"
             />
             <OutlinedLShape
               color={fillColor}
-              className="cvan-shape cvan-shape-right absolute bottom-12 right-12 xl:bottom-20 xl:left-20 xl:right-auto w-16 h-16 xl:w-24 xl:h-24 pointer-events-none transition-transform duration-700 ease-in-out"
-              style={{ transform: 'translate(0, 0) rotate(0deg)' }}
+              className="cvan-shape cvan-shape-right absolute bottom-16 right-8 lg:bottom-28 lg:right-16 w-16 h-16 lg:w-24 lg:h-24 pointer-events-none"
+              style={{ transform: 'rotate(180deg)' }}
             />
           </>
         );

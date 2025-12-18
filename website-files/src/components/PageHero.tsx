@@ -179,17 +179,17 @@ export function PageHero({
         );
 
       case 'support':
-        // Support arrangement (Mentoring) - shapes always on right, stacked vertically
+        // Support arrangement (Mentoring) - filled L "cups" outlined L, always on right
         return (
           <>
             <FilledLShape
               color={fillColor}
-              className="cvan-shape cvan-shape-left absolute bottom-4 right-4 lg:bottom-8 lg:right-8 w-16 h-16 lg:w-24 lg:h-24 pointer-events-none"
+              className="cvan-shape cvan-shape-left absolute bottom-4 right-36 lg:bottom-8 lg:right-44 w-20 h-20 lg:w-28 lg:h-28 pointer-events-none"
             />
             <OutlinedLShape
               color={fillColor}
-              className="cvan-shape cvan-shape-right absolute bottom-16 right-8 lg:bottom-28 lg:right-16 w-16 h-16 lg:w-24 lg:h-24 pointer-events-none"
-              style={{ transform: 'rotate(180deg)' }}
+              className="cvan-shape cvan-shape-right absolute bottom-12 right-20 lg:bottom-20 lg:right-36 w-16 h-16 lg:w-24 lg:h-24 pointer-events-none"
+              style={{ transform: 'rotate(90deg)' }}
             />
           </>
         );

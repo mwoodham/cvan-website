@@ -44,10 +44,12 @@ export default function EventCard({ event, basePath = '/events' }: EventCardProp
           </Link>
         </h3>
 
-        {/* About - simplified for now */}
+        {/* About - strip HTML tags for card preview */}
         {event.about && (
           <p className="text-sm text-black/70 mb-4 line-clamp-2">
-            {typeof event.about === 'string' ? event.about : ''}
+            {typeof event.about === 'string'
+              ? event.about.replace(/<[^>]*>/g, '').replace(/&[^;]+;/g, ' ').trim()
+              : ''}
           </p>
         )}
 

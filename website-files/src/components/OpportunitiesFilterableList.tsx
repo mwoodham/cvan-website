@@ -179,7 +179,7 @@ export function OpportunitiesFilterableList({ opportunities }: OpportunitiesFilt
         <div className="grid grid-cols-1 lg:grid-cols-4 gap-8">
           {/* Filters Sidebar */}
           <aside className="lg:col-span-1">
-            <div className="lg:sticky lg:top-6 space-y-6">
+            <div className="lg:sticky lg:top-24 space-y-6">
               <div>
                 <h2 className="text-lg font-bold mb-4">Search & Filter</h2>
                 <SearchInput

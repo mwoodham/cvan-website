@@ -1,7 +1,8 @@
 import Link from 'next/link';
+import Image from 'next/image';
 import { format } from 'date-fns';
 import { Calendar } from 'lucide-react';
-import { ActivityArticle, tagNameToSlug } from '@/lib/directus';
+import { ActivityArticle, tagNameToSlug, getImageUrl } from '@/lib/directus';
 
 interface ActivityCardProps {
   article: ActivityArticle;
@@ -13,16 +14,20 @@ export default function ActivityCard({ article, currentTagFilter }: ActivityCard
   const articleLink = currentTagFilter
     ? `/activity/${article.slug}?from=${encodeURIComponent(currentTagFilter)}`
     : `/activity/${article.slug}`;
+  const imageUrl = getImageUrl(article.featured_image_id);
 
   return (
     <article className="group relative bg-white border border-black/10 hover:border-cvan-green transition-all duration-300">
       {/* Featured Image */}
-      {article.featured_image_id && (
-        <div className="aspect-[16/9] overflow-hidden bg-gray-100">
-          <img
-            src={`/assets/${article.featured_image_id}?width=600&height=338&fit=cover&t=${article.updated_at}`}
+      {imageUrl && (
+        <div className="aspect-[16/9] overflow-hidden bg-gray-100 relative">
+          <Image
+            src={imageUrl}
             alt={article.title}
+            width={600}
+            height={338}
             className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300"
+            sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
           />
         </div>
       )}

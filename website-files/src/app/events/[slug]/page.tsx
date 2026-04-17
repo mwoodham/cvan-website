@@ -1,8 +1,9 @@
 import { notFound } from 'next/navigation';
 import Link from 'next/link';
+import Image from 'next/image';
 import { format } from 'date-fns';
 import { Calendar, MapPin, ExternalLink, ArrowLeft, Tag } from 'lucide-react';
-import { getEventBySlug } from '@/lib/directus';
+import { getEventBySlug, getImageUrl } from '@/lib/directus';
 import directus from '@/lib/directus';
 import { readItem } from '@directus/sdk';
 
@@ -60,12 +61,15 @@ export default async function EventPage({ params }: EventPageProps) {
       </div>
 
       {/* Hero Section with Image Background */}
-      {event.image_id && (
+      {getImageUrl(event.image_id) && (
         <div className="relative h-[400px] lg:h-[500px] overflow-hidden bg-gray-900">
-          <img
-            src={`/assets/${event.image_id}?width=1920&height=800&fit=cover&t=${event.updated_at}`}
+          <Image
+            src={getImageUrl(event.image_id)!}
             alt={event.title}
-            className="w-full h-full object-cover opacity-60"
+            fill
+            priority
+            sizes="100vw"
+            className="object-cover opacity-60"
           />
           <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/40 to-transparent" />
 
@@ -89,7 +93,7 @@ export default async function EventPage({ params }: EventPageProps) {
 
       <article className="mx-auto max-w-4xl px-6 lg:px-8 py-12">
         {/* Header for events without image */}
-        {!event.image_id && (
+        {!getImageUrl(event.image_id) && (
           <header className="mb-8">
             {event.timing && (
               <div className="mb-4">

@@ -1,4 +1,8 @@
 import { createDirectus, rest, readItems, readItem, readSingleton, staticToken } from '@directus/sdk';
+import { DirectusFile, FILE_FIELDS } from './images';
+
+export type { DirectusFile } from './images';
+export { getImageUrl } from './images';
 
 // Type definitions for our Directus collections
 export type Event = {
@@ -11,7 +15,7 @@ export type Event = {
   event_date: string;
   event_end_date?: string;
   location_address: string;
-  image_id?: string; // UUID pointing to directus_files
+  image_id?: DirectusFile | null;
   link: string;
   contact_email: string;
   submitted_by: string;
@@ -34,7 +38,7 @@ export type Opportunity = {
   deadline_type: string;
   wage_fee: string;
   location_address: string;
-  image_id?: string; // UUID pointing to directus_files
+  image_id?: DirectusFile | null;
   link: string;
   contact_email: string;
   submitted_by: string;
@@ -53,7 +57,7 @@ export type ActivityArticle = {
   slug: string;
   excerpt?: string;
   content: any;
-  featured_image_id?: string; // UUID pointing to directus_files
+  featured_image_id?: DirectusFile | null;
   author_id?: number;
   is_archive: boolean;
   published_at?: string;
@@ -69,7 +73,7 @@ export type TeamMember = {
   role: string;
   bio?: any;
   type: string;
-  photo_id?: string; // UUID pointing to directus_files
+  photo_id?: DirectusFile | null;
   email?: string;
   order: number;
   created_at: string;
@@ -197,17 +201,27 @@ const directus = createDirectus<DirectusCollections>(
 
 export default directus;
 
+// Expand a file-relation field alongside the main record. Cast to `any` because
+// the SDK's generic fields type can't resolve file relations against DirectusFile
+// — runtime behaviour is correct; output types come from our collection declarations.
+const fileFields = [...FILE_FIELDS];
+const eventFields = ['*', { image_id: fileFields }] as any;
+const opportunityFields = ['*', { image_id: fileFields }] as any;
+const activityFields = ['*', { featured_image_id: fileFields }] as any;
+const teamMemberFields = ['*', { photo_id: fileFields }] as any;
+
 // Helper functions for common queries
 
-export async function getPublishedEvents(limit?: number) {
-  const events = await directus.request(
+export async function getPublishedEvents(limit?: number): Promise<Event[]> {
+  const events = (await directus.request(
     readItems('events', {
+      fields: eventFields,
       filter: {
         status: { _eq: 'published' },
       },
       sort: ['event_date'],
     })
-  );
+  )) as unknown as Event[];
 
   // Filter out past events (use end_date if available, otherwise event_date)
   const today = new Date();
@@ -222,15 +236,16 @@ export async function getPublishedEvents(limit?: number) {
   return limit ? upcomingEvents.slice(0, limit) : upcomingEvents;
 }
 
-export async function getPublishedOpportunities(limit?: number) {
-  const opportunities = await directus.request(
+export async function getPublishedOpportunities(limit?: number): Promise<Opportunity[]> {
+  const opportunities = (await directus.request(
     readItems('opportunities', {
+      fields: opportunityFields,
       filter: {
         status: { _eq: 'published' },
       },
       sort: ['deadline'],
     })
-  );
+  )) as unknown as Opportunity[];
 
   // Filter out past opportunities (unless they're ongoing)
   const today = new Date();
@@ -250,21 +265,23 @@ export async function getPublishedOpportunities(limit?: number) {
   return limit ? activeOpportunities.slice(0, limit) : activeOpportunities;
 }
 
-export async function getPublishedActivity(limit?: number) {
-  return await directus.request(
+export async function getPublishedActivity(limit?: number): Promise<ActivityArticle[]> {
+  return (await directus.request(
     readItems('activity', {
+      fields: activityFields,
       filter: {
         status: { _eq: 'published' },
       },
       sort: ['-published_at'],
       limit: limit ?? -1,
     })
-  );
+  )) as unknown as ActivityArticle[];
 }
 
-export async function getCurrentActivity(limit?: number) {
-  return await directus.request(
+export async function getCurrentActivity(limit?: number): Promise<ActivityArticle[]> {
+  return (await directus.request(
     readItems('activity', {
+      fields: activityFields,
       filter: {
         status: { _eq: 'published' },
         is_archive: { _eq: false },
@@ -272,12 +289,13 @@ export async function getCurrentActivity(limit?: number) {
       sort: ['-published_at'],
       limit: limit ?? -1,
     })
-  );
+  )) as unknown as ActivityArticle[];
 }
 
-export async function getArchivedActivity(limit?: number, offset?: number) {
-  return await directus.request(
+export async function getArchivedActivity(limit?: number, offset?: number): Promise<ActivityArticle[]> {
+  return (await directus.request(
     readItems('activity', {
+      fields: activityFields,
       filter: {
         status: { _eq: 'published' },
         is_archive: { _eq: true },
@@ -286,7 +304,7 @@ export async function getArchivedActivity(limit?: number, offset?: number) {
       limit: limit ?? -1,
       offset: offset ?? 0,
     })
-  );
+  )) as unknown as ActivityArticle[];
 }
 
 export async function getArchivedActivityCount() {
@@ -302,49 +320,53 @@ export async function getArchivedActivityCount() {
   return (result as unknown as Array<{ count: number }>)[0]?.count ?? 0;
 }
 
-export async function getEventBySlug(slug: string) {
-  const results = await directus.request(
+export async function getEventBySlug(slug: string): Promise<Event | null> {
+  const results = (await directus.request(
     readItems('events', {
+      fields: eventFields,
       filter: {
         slug: { _eq: slug },
       },
       limit: 1,
     })
-  );
+  )) as unknown as Event[];
   return results[0] || null;
 }
 
-export async function getActivityBySlug(slug: string) {
-  const results = await directus.request(
+export async function getActivityBySlug(slug: string): Promise<ActivityArticle | null> {
+  const results = (await directus.request(
     readItems('activity', {
+      fields: activityFields,
       filter: {
         slug: { _eq: slug },
       },
       limit: 1,
     })
-  );
+  )) as unknown as ActivityArticle[];
   return results[0] || null;
 }
 
-export async function getOpportunityBySlug(slug: string) {
-  const results = await directus.request(
+export async function getOpportunityBySlug(slug: string): Promise<Opportunity | null> {
+  const results = (await directus.request(
     readItems('opportunities', {
+      fields: opportunityFields,
       filter: {
         slug: { _eq: slug },
       },
       limit: 1,
     })
-  );
+  )) as unknown as Opportunity[];
   return results[0] || null;
 }
 
-export async function getTeamMembers(type?: 'team' | 'steering_group') {
-  return await directus.request(
+export async function getTeamMembers(type?: 'team' | 'steering_group'): Promise<TeamMember[]> {
+  return (await directus.request(
     readItems('team_members', {
+      fields: teamMemberFields,
       filter: type ? { type: { _eq: type } } : {},
       sort: ['order'],
     })
-  );
+  )) as unknown as TeamMember[];
 }
 
 // Singleton helper functions
@@ -435,15 +457,16 @@ export async function getProjectTagDescriptionBySlug(slug: string): Promise<Proj
 export async function getActivityByTag(tagName: string): Promise<ActivityArticle[]> {
   try {
     // Fetch all published activity and filter client-side since Directus JSON filtering can be tricky
-    const results = await directus.request(
+    const results = (await directus.request(
       readItems('activity', {
+        fields: activityFields,
         filter: {
           status: { _eq: 'published' },
         },
         sort: ['-published_at'],
         limit: -1,
       })
-    );
+    )) as unknown as ActivityArticle[];
 
     // Filter by tag (check both generic_tags and project_tags) - case insensitive
     const searchTagLower = tagName.toLowerCase();

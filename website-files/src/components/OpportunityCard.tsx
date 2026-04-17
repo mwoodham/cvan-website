@@ -1,7 +1,8 @@
 import Link from 'next/link';
+import Image from 'next/image';
 import { format } from 'date-fns';
 import { Calendar, AlertCircle } from 'lucide-react';
-import { Opportunity } from '@/lib/directus';
+import { Opportunity, getImageUrl } from '@/lib/directus';
 
 interface OpportunityCardProps {
   opportunity: Opportunity;
@@ -24,15 +25,20 @@ export default function OpportunityCard({ opportunity, basePath = '/opportunitie
     return format(deadline, 'dd MMM yyyy');
   };
 
+  const imageUrl = getImageUrl(opportunity.image_id);
+
   return (
     <article className="group relative bg-white border border-black/10 hover:border-cvan-orange transition-all duration-300">
       {/* Featured Image */}
-      {opportunity.image_id && (
-        <div className="aspect-[16/9] overflow-hidden bg-gray-100">
-          <img
-            src={`/assets/${opportunity.image_id}?width=600&height=338&fit=cover&t=${opportunity.updated_at}`}
+      {imageUrl && (
+        <div className="aspect-[16/9] overflow-hidden bg-gray-100 relative">
+          <Image
+            src={imageUrl}
             alt={opportunity.title}
+            width={600}
+            height={338}
             className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300"
+            sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
           />
         </div>
       )}

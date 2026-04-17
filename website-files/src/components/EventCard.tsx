@@ -1,7 +1,8 @@
 import Link from 'next/link';
+import Image from 'next/image';
 import { format } from 'date-fns';
 import { Calendar, MapPin } from 'lucide-react';
-import { Event } from '@/lib/directus';
+import { Event, getImageUrl } from '@/lib/directus';
 
 interface EventCardProps {
   event: Event;
@@ -11,16 +12,20 @@ interface EventCardProps {
 export default function EventCard({ event, basePath = '/events' }: EventCardProps) {
   const startDate = new Date(event.event_date);
   const endDate = event.event_end_date ? new Date(event.event_end_date) : null;
+  const imageUrl = getImageUrl(event.image_id);
 
   return (
     <article className="group relative bg-white border border-black/10 hover:border-cvan-purple transition-all duration-300">
       {/* Image */}
-      {event.image_id && (
-        <div className="aspect-[16/9] overflow-hidden bg-gray-100">
-          <img
-            src={`/assets/${event.image_id}?width=800&height=450&fit=cover&t=${event.updated_at}`}
+      {imageUrl && (
+        <div className="aspect-[16/9] overflow-hidden bg-gray-100 relative">
+          <Image
+            src={imageUrl}
             alt={event.title}
+            width={800}
+            height={450}
             className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300"
+            sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
           />
         </div>
       )}

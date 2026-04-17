@@ -1,8 +1,9 @@
 import { notFound } from 'next/navigation';
 import Link from 'next/link';
+import Image from 'next/image';
 import { format } from 'date-fns';
 import { Calendar, MapPin, ExternalLink, ArrowLeft, Tag, Banknote } from 'lucide-react';
-import { getOpportunityBySlug } from '@/lib/directus';
+import { getOpportunityBySlug, getImageUrl } from '@/lib/directus';
 import directus from '@/lib/directus';
 import { readItem } from '@directus/sdk';
 
@@ -71,12 +72,15 @@ export default async function OpportunityPage({ params }: OpportunityPageProps) 
       </div>
 
       {/* Hero Section with Image Background */}
-      {opportunity.image_id && (
+      {getImageUrl(opportunity.image_id) && (
         <div className="relative h-[400px] lg:h-[500px] overflow-hidden bg-gray-900">
-          <img
-            src={`/assets/${opportunity.image_id}?width=1920&height=800&fit=cover&t=${opportunity.updated_at}`}
+          <Image
+            src={getImageUrl(opportunity.image_id)!}
             alt={opportunity.title}
-            className="w-full h-full object-cover opacity-60"
+            fill
+            priority
+            sizes="100vw"
+            className="object-cover opacity-60"
           />
           <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/40 to-transparent" />
 
@@ -100,7 +104,7 @@ export default async function OpportunityPage({ params }: OpportunityPageProps) 
 
       <article className="mx-auto max-w-4xl px-6 lg:px-8 py-12">
         {/* Header for opportunities without image */}
-        {!opportunity.image_id && (
+        {!getImageUrl(opportunity.image_id) && (
           <header className="mb-8">
             {opportunity.wage_fee && (
               <div className="mb-4">

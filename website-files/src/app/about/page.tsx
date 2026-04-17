@@ -1,5 +1,6 @@
+import Image from 'next/image';
 import { PageHero } from '@/components/PageHero';
-import { getTeamMembers, getAboutPage } from '@/lib/directus';
+import { getTeamMembers, getAboutPage, getImageUrl } from '@/lib/directus';
 import type { Metadata } from 'next';
 
 export const metadata: Metadata = {
@@ -100,14 +101,19 @@ export default async function AboutPage() {
           <h2 className="text-4xl font-bold mb-12 text-center">Our Team</h2>
           <div className="flex flex-col gap-8">
             {teamMembers.length > 0 ? (
-              teamMembers.map((member) => (
+              teamMembers.map((member) => {
+                const photoUrl = getImageUrl(member.photo_id);
+                return (
                 <div key={member.id} className="rounded-lg bg-white p-8">
-                  {member.photo_id && (
+                  {photoUrl && (
                     <div className="mb-6 flex justify-center">
-                      <img
-                        src={`/assets/${member.photo_id}?width=300&height=300&fit=cover`}
+                      <Image
+                        src={photoUrl}
                         alt={member.name}
+                        width={300}
+                        height={300}
                         className="w-48 h-48 object-cover rounded-full"
+                        sizes="192px"
                       />
                     </div>
                   )}
@@ -128,7 +134,8 @@ export default async function AboutPage() {
                     />
                   )}
                 </div>
-              ))
+                );
+              })
             ) : (
               <div className="text-center py-12 text-black/60">
                 Team information coming soon
@@ -156,14 +163,19 @@ export default async function AboutPage() {
 
           <div className="grid gap-8 md:grid-cols-2">
             {steeringGroup.length > 0 ? (
-              steeringGroup.map((member) => (
+              steeringGroup.map((member) => {
+                const photoUrl = getImageUrl(member.photo_id);
+                return (
                 <div key={member.id} className="rounded-lg border border-black/10 p-6">
-                  {member.photo_id && (
+                  {photoUrl && (
                     <div className="mb-4 flex justify-center">
-                      <img
-                        src={`/assets/${member.photo_id}?width=200&height=200&fit=cover`}
+                      <Image
+                        src={photoUrl}
                         alt={member.name}
+                        width={200}
+                        height={200}
                         className="w-32 h-32 object-cover rounded-full"
+                        sizes="128px"
                       />
                     </div>
                   )}
@@ -184,7 +196,8 @@ export default async function AboutPage() {
                     />
                   )}
                 </div>
-              ))
+                );
+              })
             ) : (
               <div className="col-span-full text-center py-12 text-black/60">
                 Steering group information coming soon
